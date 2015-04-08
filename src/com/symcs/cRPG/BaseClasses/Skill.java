@@ -36,6 +36,8 @@ public class Skill {
 	
 	private String skillName = "";
 	private List<String> skillDescription = Arrays.asList("");
+	private boolean ignoreAllies=false;
+	private boolean specialEffectIfHitAllies=false;
 	
 	public Skill(cRPG plugin){
 		this.plugin = plugin;
@@ -69,6 +71,23 @@ public class Skill {
 	public double getSkillDamage(){
 		return this.damage;
 	}
+	
+	public void setIgnoreAllies(boolean b_ignoreAllies){this.ignoreAllies = b_ignoreAllies;}
+	public void setIgnoreAllies(){setIgnoreAllies(true);}
+	//aliases:
+	public void setSkillIgnoreAllies(boolean b_ignoreAllies){setIgnoreAllies(b_ignoreAllies);}
+	public void setSkillIgnoreFriendly(boolean b_ignoreAllies){setIgnoreAllies(b_ignoreAllies);}
+	public void setSkillIgnoreAllies(){setIgnoreAllies(true);}
+	public void setSkillIgnoreFriendly(){setIgnoreAllies(true);}
+	
+	public boolean getIgnoreAllies(){return this.ignoreAllies;}
+	//alias
+	public boolean ignoreAllies(){return getIgnoreAllies();}
+	
+	public void setSkillDifferentOnAllies(boolean b_special){this.specialEffectIfHitAllies = b_special;}
+	public void setSkillDifferentOnAllies(){setSkillDifferentOnAllies(true);}
+	
+	public boolean getSkillDifferentOnAllies(){return this.specialEffectIfHitAllies;}
 	
 	public void setCastFrom(CastFrom type){
 		this.SkillCastFrom = type;
@@ -153,6 +172,11 @@ public class Skill {
 	
 	//can be overriden to add extra effects on hit
 	public void onSkillHitEntity(LivingEntity hit){
+		
+	}
+	
+	//can be overriden to add extra effects on hit friendly
+	public void onSkillHitFriendly(Player hit){
 		
 	}
 	

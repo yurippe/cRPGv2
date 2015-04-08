@@ -1,5 +1,6 @@
 package com.symcs.cRPG.utils.Hitboxes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -17,6 +18,7 @@ public abstract class Hitbox {
 		this.plugin = plugin;
 	}
 	
+
 	public boolean contains(Location loc, Vector p1, Vector p2) {
 		if(loc == null) {
 			return false;
@@ -33,9 +35,22 @@ public abstract class Hitbox {
 		}
 	}
 	
+	public void registerSelf(Skill skill){
+		plugin.getDamageManager().onSkillHitPlayer(skill, skill.getPlayer());
+	}
+	
 
 	
 	public abstract List<LivingEntity> getEntitiesHit();//includes players
-	public abstract List<Player> getPlayersHit();
+	//public abstract List<Player> getPlayersHit();
+	public List<Player> getPlayersHit(){//Strictly get players only
+		
+		List<LivingEntity> l = getEntitiesHit();
+		List<Player> returnlist = new ArrayList<Player>();
+		for(LivingEntity e:l){
+			if(e instanceof Player){returnlist.add((Player)e);}
+		}
+		return returnlist;
+	}
 	
 }

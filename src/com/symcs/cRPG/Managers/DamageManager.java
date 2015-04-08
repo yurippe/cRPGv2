@@ -2,6 +2,7 @@ package com.symcs.cRPG.Managers;
 
 import com.symcs.cRPG.BaseClasses.Skill;
 import com.symcs.cRPG.Data.PlayerData;
+import com.symcs.cRPG.utils.Party;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -109,12 +110,36 @@ public class DamageManager {
 	
 	public void onSkillHitPlayer(Skill skill, Player player){
 		//Allows skills to define special behavior on hits
+		
+		if(skill.ignoreAllies()){
+			Party party = plugin.getPartyManager().getParty(skill.getPlayer());
+			if(!(party==null)){
+				if(party.isMember(player)){
+					return;
+				}
+				
+			}
+		}
+		
+		if(skill.getSkillDifferentOnAllies()){
+			Party party = plugin.getPartyManager().getParty(skill.getPlayer());
+			if(!(party==null)){
+				if(party.isMember(player)){
+					skill.onSkillHitFriendly(player);
+					return;
+				}
+				
+			}else if(skill.getPlayer() == player){skill.onSkillHitFriendly(player);return;}
+		}
+		
+
 		skill.onSkillHitPlayer(player);
 		skill.onSkillHitEntityOrPlayer(player);
 	}
 	
 	public void onSkillHitEntity(Skill skill, LivingEntity entity){
 		//Allows skills to define special behavior on hits
+		
 		skill.onSkillHitEntity(entity);
 		skill.onSkillHitEntityOrPlayer(entity);
 	}

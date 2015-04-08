@@ -62,6 +62,7 @@ public class PartyManager {
 	}
 	
 	public void InvitePlayer(Player invitedFrom, Player invitedPlayer){
+		if(!(plugin.getServer().getOnlinePlayers().contains(invitedPlayer))){invitedFrom.sendMessage(ChatColor.RED + "Player not online"); return;}
 		if(invitedFrom == invitedPlayer){invitedFrom.sendMessage(ChatColor.RED + "You can't invite yourself!"); return;}
 		if(!(this.playersParty.containsKey(invitedFrom))){CreateParty(invitedFrom);} //inviter is not in any party, create one
 		if(this.playersParty.containsKey(invitedPlayer)){invitedFrom.sendMessage(ChatColor.RED + "Player is already in a party");return;}
@@ -147,6 +148,7 @@ public class PartyManager {
 	}
 	
 	public Party getParty(Player player){
+		if(player == null){return null;}
 		if(this.playersParty.containsKey(player)){
 			return this.playersParty.get(player);
 		}else{return null;}

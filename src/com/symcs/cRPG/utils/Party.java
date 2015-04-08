@@ -44,4 +44,8 @@ public class Party {
 	public boolean isFull(){
 		return (this.players.size() >= this.MaxSize);
 	}
+	
+	public boolean isMember(Player p){
+		return this.players.contains(p);
+	}
 }

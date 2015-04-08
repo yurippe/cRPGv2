@@ -65,6 +65,7 @@ public class HitboxSquareFront extends Hitbox{
 		List<LivingEntity> returnlist = new ArrayList<LivingEntity>();
 		for(Entity e: ents){
 			if(e instanceof LivingEntity){
+				//if(e.getLocation().toVector().isInAABB(p1, p2)){
 				if(contains(e.getLocation(), p1, p2)){
 					returnlist.add((LivingEntity)e);
 				}
@@ -75,6 +76,7 @@ public class HitboxSquareFront extends Hitbox{
 		return returnlist;
 	}
 	
+	/*
 	public List<Player> getPlayersHit(){//Strictly get players only
 		
 		List<LivingEntity> l = getEntitiesHit();
@@ -84,7 +86,7 @@ public class HitboxSquareFront extends Hitbox{
 		}
 		return returnlist;
 	}
-	
+	*/
 
 
 }

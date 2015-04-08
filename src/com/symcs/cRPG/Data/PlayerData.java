@@ -37,6 +37,7 @@ public class PlayerData {
 		addClass(new PlayerClassGuardian(p, plugin));
 		addClass(new PlayerClassRogue(p, plugin));
 		
+		addClass(new PlayerClassTEST(p, plugin));
 		setPlayerClass("Mage");
 		
 	}

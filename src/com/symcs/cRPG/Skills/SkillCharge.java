@@ -29,6 +29,7 @@ public class SkillCharge extends Skill{
 		setSkillName("Charge");
 		setSkillDescription(Arrays.asList("Charge at a location", "and knock up blocks", "when you land"));
 		setSkillCooldown(3);
+		setSkillIgnoreFriendly();
 	}
 	
 	@Override
