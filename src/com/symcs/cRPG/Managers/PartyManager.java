@@ -18,7 +18,6 @@ import com.symcs.cRPG.utils.Party;
 
 public class PartyManager {
 	
-	@SuppressWarnings("unused")
 	private cRPG plugin;
 
 	public HashMap<Player, Party> playersParty = new HashMap<Player, Party>();

@@ -14,8 +14,12 @@ import com.symcs.cRPG.BaseClasses.Skill;
 public abstract class Hitbox {
 
 	protected cRPG plugin;
+	protected boolean limitedSet = false;
+	private List<LivingEntity> limitedTo;
+	
 	public Hitbox(cRPG plugin){
 		this.plugin = plugin;
+		this.limitedSet = false;
 	}
 	
 
@@ -28,10 +32,29 @@ public abstract class Hitbox {
 				&& loc.getZ() >= p1.getZ() && loc.getZ() <= p2.getZ();
 		}
 	
+	public void limitSet(List<LivingEntity> limitTo){
+		if(!(limitTo == null)){
+			this.limitedTo = limitTo;
+			this.limitedSet = true;
+		}else{this.limitedSet = false;}
+	}
+	
+	public void unLimitSet(){this.limitedSet = false;}
+	public boolean isLimitedSet(){return this.limitedSet;}
+	
 	public void registerHits(Skill skill){
 		for(LivingEntity ent : getEntitiesHit()){
-			if(ent instanceof Player){plugin.getDamageManager().onSkillHitPlayer(skill, (Player) ent);}
-			else{plugin.getDamageManager().onSkillHitEntity(skill, ent);}
+			
+			if(this.limitedSet){
+				if(this.limitedTo.contains(ent)){
+					if(ent instanceof Player){plugin.getDamageManager().onSkillHitPlayer(skill, (Player) ent);}
+					else{plugin.getDamageManager().onSkillHitEntity(skill, ent);}
+				}
+			}
+			else{
+				if(ent instanceof Player){plugin.getDamageManager().onSkillHitPlayer(skill, (Player) ent);}
+				else{plugin.getDamageManager().onSkillHitEntity(skill, ent);}
+			}
 		}
 	}
 	
