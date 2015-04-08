@@ -1,0 +1,21 @@
+name: cRPG
+version: 0.1.0
+main: com.symcs.cRPG.cRPG
+author: Chriz
+
+
+
+
+commands:
+    partyinvite:
+      description: Invites a player to your party.
+      usage: /<command> <player>
+    partykick:
+      description: Kicks a player from your party.
+      usage: /<command> <player>
+    partyinviteaccept:
+      description: Accepts a pending party invite.
+      usage: /<command>
+    partyinvitedecline:
+      description: Declines a pending party invite.
+      usage: /<command>
