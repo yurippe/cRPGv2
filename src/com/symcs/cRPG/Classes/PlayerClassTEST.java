@@ -26,10 +26,9 @@ public class PlayerClassTEST extends PlayerClass{
 		
 		setSkill(1, new PlayerSkill(this, new SkillTEST(this.plugin)));
 		setSkill(2, new PlayerSkill(this, new SkillZAMPLE(this.plugin)));
-		setSkill(5, new PlayerSkill(this, new SkillDaybreak(this.plugin)));
-		setSkillUnlockLevel(5, 30);
-		setSkill(6, new PlayerSkill(this, new SkillPerfectPitch(this.plugin)));
-		setSkill(4, new PlayerSkill(this, new SkillHealingTouch(this.plugin)));
+		setSkill(5, new PlayerSkill(this, new SkillCleave(this.plugin)));
+		setSkill(6, new PlayerSkill(this, new SkillSongOfDuality(this.plugin)));
+		setSkill(4, new PlayerSkill(this, new SkillShockWave(this.plugin)));
 		setSkill(3, new PlayerSkill(this, new SkillCharge(this.plugin)));
 		
 	}

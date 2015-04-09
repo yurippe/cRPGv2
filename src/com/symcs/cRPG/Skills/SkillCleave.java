@@ -3,6 +3,7 @@ package com.symcs.cRPG.Skills;
 import java.util.Arrays;
 
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -34,7 +35,7 @@ public class SkillCleave extends Skill{
 	public void onSkillHit(LivingEntity entity){
 		dealDamage(entity);
 		if(entity instanceof Player){
-			//NMSFunctions.sendIngameEffect(block.getLocation(), 2001, 133, (Player) entity);
+			NMSFunctions.sendIngameEffect(this.player.getLocation().getBlock().getRelative(BlockFace.UP, 2).getLocation(), 2001, 100, (Player) entity);
 		}
 	}
 	
