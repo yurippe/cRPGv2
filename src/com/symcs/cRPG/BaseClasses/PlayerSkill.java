@@ -46,6 +46,13 @@ public class PlayerSkill {
 	public int getCooldown(){
 		return this.skill.getSkillCooldown();
 	}
+	
+	public int calculateCooldown(){
+		//TODO calculate cooldown with cooldown reductions
+		double aprox = getCooldown() * this.playerdata.getStatusEffectManager().cooldownModifier();
+		return (int) aprox;
+	}
+	
 	public void setCooldown(int cooldown){
 		this.skill.setSkillCooldown(cooldown);
 	}
@@ -79,7 +86,7 @@ public class PlayerSkill {
 	public void invokeCooldown(){
 		
 		setOnCooldown(true);
-		setRemainingCooldown(getCooldown());
+		setRemainingCooldown(calculateCooldown());
 		this.updateCooldownItem();
 		
 		new Task(this.skill.getPlugin()){

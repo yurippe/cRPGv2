@@ -204,6 +204,45 @@ public class StatusEffectManager {
 					try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}}
 					mod_total *= effect.defenseModifier();
 				}}} return mod_total;}
+	
+	public double cooldownModifier(){
+		Iterator<StatusEffect> iter = this.StatusEffects.iterator();
+		double mod_total = 1.0;
+		while(iter.hasNext()){
+			StatusEffect effect = iter.next();
+			if(effect.getType() == StatusEffect.Type.TIMED){mod_total *= effect.cooldownModifier();}
+			if(effect.getType() == StatusEffect.Type.CHARGE || effect.getType() == StatusEffect.Type.CHARGE_LIMITED){
+				if(!(effect.cooldownModifier() == 1.0)){
+					if(effect.tickDuration()){effect.onFade(StatusEffect.FadeCause.CHARGES_SPENT);
+					try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}}
+					mod_total *= effect.cooldownModifier();
+				}}} return mod_total;}
+	
+	public double healingModifier(){
+		Iterator<StatusEffect> iter = this.StatusEffects.iterator();
+		double mod_total = 1.0;
+		while(iter.hasNext()){
+			StatusEffect effect = iter.next();
+			if(effect.getType() == StatusEffect.Type.TIMED){mod_total *= effect.healingModifier();}
+			if(effect.getType() == StatusEffect.Type.CHARGE || effect.getType() == StatusEffect.Type.CHARGE_LIMITED){
+				if(!(effect.healingModifier() == 1.0)){
+					if(effect.tickDuration()){effect.onFade(StatusEffect.FadeCause.CHARGES_SPENT);
+					try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}}
+					mod_total *= effect.healingModifier();
+				}}} return mod_total;}
+	
+	public double healingTakenModifier(){
+		Iterator<StatusEffect> iter = this.StatusEffects.iterator();
+		double mod_total = 1.0;
+		while(iter.hasNext()){
+			StatusEffect effect = iter.next();
+			if(effect.getType() == StatusEffect.Type.TIMED){mod_total *= effect.healingTakenModifier();}
+			if(effect.getType() == StatusEffect.Type.CHARGE || effect.getType() == StatusEffect.Type.CHARGE_LIMITED){
+				if(!(effect.healingTakenModifier() == 1.0)){
+					if(effect.tickDuration()){effect.onFade(StatusEffect.FadeCause.CHARGES_SPENT);
+					try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}}
+					mod_total *= effect.healingTakenModifier();
+				}}} return mod_total;}
 		
 	
 	

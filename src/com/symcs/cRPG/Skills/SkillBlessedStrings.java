@@ -18,9 +18,9 @@ public class SkillBlessedStrings extends Skill{
 		super(plugin);
 		
 		setSkillItem(new ItemStack(Material.APPLE));
-		setSkillName("Sample skill name");
-		setSkillDescription(Arrays.asList("sample skill", "description"));
-		setSkillCooldown(3);
+		setSkillName("Blessed Strings");
+		setSkillDescription(Arrays.asList("Increase health regeneration", "and damage for 6 seconds", "for all party members"));
+		setSkillCooldown(30);
 		//setSkillIgnoreFriendly();
 		//setSkillDifferentOnAllies();
 	}
