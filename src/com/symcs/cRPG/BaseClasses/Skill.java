@@ -142,8 +142,8 @@ public class Skill {
 	public Type getSkillType(){
 		return this.SkillType;
 	}
-	protected void registerProjectile(Projectile projectile){
-		plugin.getProjectileManager().registerProjectile(projectile, this);
+	protected Projectile registerProjectile(Projectile projectile){
+		return plugin.getProjectileManager().registerProjectile(projectile, this);
 	}
 	protected void setSkillBlock(Block b){
 		b.setMetadata("SkillBlock", new FixedMetadataValue(plugin, this));

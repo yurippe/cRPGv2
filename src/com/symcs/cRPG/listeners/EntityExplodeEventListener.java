@@ -31,7 +31,7 @@ public final class EntityExplodeEventListener implements Listener {
 			Projectile proj = (Projectile)event.getEntity();
 			if(plugin.getProjectileManager().isSkillProjectile(proj)){
 				//is a skill projectile
-				plugin.getProjectileManager().unregisterProjectile(proj);
+				//plugin.getProjectileManager().unregisterProjectile(proj);
 			    Iterator<Block> iter = event.blockList().iterator();
 			    //Removes all nonskill blocks
 			    while(iter.hasNext()){

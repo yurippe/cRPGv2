@@ -60,6 +60,7 @@ public class DamageManager {
 					Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(evente.getDamager());
 					onSkillHitPlayer(damagerSkill, (Player) event.getEntity());
 					event.setDamage(0.0);
+					event.setCancelled(true);
 					return; //Stop here to let the skill handle onhit
 				}
 				
@@ -88,6 +89,7 @@ public class DamageManager {
 					Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(evente.getDamager());
 					onSkillHitEntity(damagerSkill, (LivingEntity) event.getEntity());
 					event.setDamage(0.0);
+					event.setCancelled(true);
 					return; //Stop here to let the skill handle onhit
 				}
     			

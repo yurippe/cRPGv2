@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Fireball;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
@@ -28,7 +28,9 @@ public class SkillClaritysWhisper extends Skill{
 	
 	@Override
 	public void Cast(){
+		
 		registerProjectile((Projectile) this.player.launchProjectile(Arrow.class));
+		
 	}
 	
 	@Override
@@ -46,5 +48,10 @@ public class SkillClaritysWhisper extends Skill{
 		plugin.getPlayerManager().getPlayer(p).getStatusEffectManager().addStatusEffect(new StatusEffectStun(1, p));
 		dealDamage(p, 3);
 		p.sendMessage("You got hit by Clarity's Whisper - Stunned for 1 seconds");
+	}
+	
+	@Override
+	public void onSkillHitEntity(LivingEntity e){
+		dealDamage(e, 300);
 	}
 }

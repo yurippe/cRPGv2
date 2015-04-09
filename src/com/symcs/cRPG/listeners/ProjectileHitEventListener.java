@@ -1,5 +1,9 @@
 package com.symcs.cRPG.listeners;
 
+import java.util.List;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -20,17 +24,30 @@ public final class ProjectileHitEventListener implements Listener {
     @EventHandler
     public void onEvent(ProjectileHitEvent event)
     {
-        /*if(plugin.getProjectileManager().isSkillProjectile(event.getEntity())){
-        	plugin.getProjectileManager().unregisterProjectile(event.getEntity());
-        }*/
-    	
-    	
+    	/*
     	if(plugin.getProjectileManager().isSkillProjectile(event.getEntity())){
-    		plugin.getLogger().info(event.getEntity().getLocation().toString() + " - Skill arrow: ");
-    		plugin.getLogger().info(plugin.getProjectileManager().getSkillOfProjectile(event.getEntity()).toString());
+    		LivingEntity hit = getFirstLiving(event.getEntity().getNearbyEntities(0.5, 0.5, 0.5));
+    		if(!(hit == null)){
+    		if(hit instanceof Player){
+				Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(event.getEntity());
+				plugin.getDamageManager().onSkillHitPlayer(damagerSkill, (Player) hit);
+    		}else{
+				Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(event.getEntity());
+				plugin.getDamageManager().onSkillHitEntity(damagerSkill, hit);
+    		}
+    		}
     	}
+    	*/
     	
 
+    }
+    
+    @SuppressWarnings("unused")
+	private LivingEntity getFirstLiving(List<Entity> es){
+    	for(Entity e:es){
+    		if(e instanceof LivingEntity){return (LivingEntity) e;}
+    	}
+    	return null;
     }
 
 }
