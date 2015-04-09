@@ -10,8 +10,8 @@ public class StatusEffect{
 	
 		protected int duration;
 		protected int timelimit;
-		public enum Type {TIMED, CHARGE, CHARGE_LIMITED}
-		public enum FadeCause{TIMEOUT, CHARGES_SPENT, UNKNOWN}
+		public enum Type {TIMED, CHARGE, CHARGE_LIMITED, CANCEL_ON_DAMAGE}
+		public enum FadeCause{TIMEOUT, CHARGES_SPENT, DAMAGE_TAKEN, UNKNOWN}
 		
 		private Type type;
 		protected Player player;
@@ -43,11 +43,13 @@ public class StatusEffect{
 		public int getTimeLimit(){if(this.type == Type.CHARGE_LIMITED){return this.timelimit;}else{return this.duration;}}
 		public void setTimeLimit(int timelimit){if(this.type == Type.CHARGE_LIMITED){this.timelimit=timelimit;}else{this.duration=timelimit;}}
 		public Type getType(){return this.type;}
+		public boolean cancelOnDamage(){if(this.type == Type.CANCEL_ON_DAMAGE){return true;}else{return false;}}
 		
 		public boolean canMove(){return true;}
 		public boolean canCast(){return true;}
 		public boolean takeFallDamage(){return true;}
 		public boolean canDie(){return true;}
+		public double damageModifier(){return 1.0;}
 		
 		public void onCast(){}
 		public void onCast(PlayerData playerdata, cRPG plugin){this.playerdata=playerdata;this.player=playerdata.player;this.plugin=plugin;onCast();}

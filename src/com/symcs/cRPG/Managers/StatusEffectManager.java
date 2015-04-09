@@ -9,6 +9,7 @@ import java.util.List;
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.Data.PlayerData;
 import com.symcs.cRPG.BaseClasses.StatusEffect;
+import com.symcs.cRPG.BaseClasses.StatusEffect.FadeCause;
 import com.symcs.cRPG.Tasks.TaskStatusEffectCooldown;
 import com.symcs.cRPG.Tasks.UnregisteredTask;
 
@@ -61,7 +62,7 @@ public class StatusEffectManager {
 			this.Cooldowns.put(effect, new TaskStatusEffectCooldown(effect, this));
 			this.Cooldowns.get(effect).runTaskTimer(plugin, 20, 20);
 			}
-			catch(ConcurrentModificationException e){plugin.getLogger().info("yup this is the problem");}
+			catch(ConcurrentModificationException e){plugin.getLogger().info("StatusEffect problem");}
 		}
 		else if(effect.getType() == StatusEffect.Type.CHARGE)
 		{
@@ -69,8 +70,23 @@ public class StatusEffectManager {
 		}
 		else if(effect.getType() == StatusEffect.Type.CHARGE_LIMITED)
 		{
+			try
+			{
 			this.Cooldowns.put(effect, new TaskStatusEffectCooldown(effect, this));
 			this.Cooldowns.get(effect).runTaskTimer(plugin, 20, 20);
+			}
+			catch(ConcurrentModificationException e){plugin.getLogger().info("StatusEffect problem");}
+			
+		}
+		else if(effect.getType() == StatusEffect.Type.CANCEL_ON_DAMAGE){
+			
+		
+			try
+			{
+			this.Cooldowns.put(effect, new TaskStatusEffectCooldown(effect, this));
+			this.Cooldowns.get(effect).runTaskTimer(plugin, 20, 20);
+			}
+			catch(ConcurrentModificationException e){plugin.getLogger().info("StatusEffect problem");}
 		}
 		
 	}
@@ -78,6 +94,25 @@ public class StatusEffectManager {
 	public void removeStatusEffect(StatusEffect effect){
 		this.removeStatusEffect(effect, StatusEffect.FadeCause.UNKNOWN);
 		
+	}
+	
+	public void clearStatusEffects(){
+		Iterator<StatusEffect> iter = this.StatusEffects.iterator();
+		while(iter.hasNext()){
+			iter.remove();
+		}
+	}
+	
+	
+	public void damageTaken(){
+		Iterator<StatusEffect> iter = this.StatusEffects.iterator();
+		while(iter.hasNext()){
+			StatusEffect effect = iter.next();
+			if(effect.cancelOnDamage()){
+				effect.onFade(FadeCause.DAMAGE_TAKEN);
+				try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}
+			}
+		}
 	}
 	
 	public void removeStatusEffect(StatusEffect effect, StatusEffect.FadeCause cause){
@@ -142,5 +177,19 @@ public class StatusEffectManager {
 					try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}}
 					return false;
 				}}} return true;}
+	
+	public double damageModifier(){
+			Iterator<StatusEffect> iter = this.StatusEffects.iterator();
+			while(iter.hasNext()){
+				StatusEffect effect = iter.next();
+				if(effect.getType() == StatusEffect.Type.TIMED){return effect.damageModifier();}
+				if(effect.getType() == StatusEffect.Type.CHARGE || effect.getType() == StatusEffect.Type.CHARGE_LIMITED){
+					if(!(effect.damageModifier() == 1.0)){
+						if(effect.tickDuration()){effect.onFade(StatusEffect.FadeCause.CHARGES_SPENT);
+						try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}}
+						return effect.damageModifier();
+					}}} return 1.0;}
+		
+	
 	
 }

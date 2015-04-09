@@ -8,19 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.symcs.cRPG.Commands.*;
 import com.symcs.cRPG.Data.PlayerData;
 import com.symcs.cRPG.Managers.*;
-import com.symcs.cRPG.listeners.EntityDamageByEntityEventListener;
-import com.symcs.cRPG.listeners.EntityDamageEventListener;
-import com.symcs.cRPG.listeners.EntityDeathEventListener;
-import com.symcs.cRPG.listeners.EntityExplodeEventListener;
-import com.symcs.cRPG.listeners.InventoryClickEventListener;
-import com.symcs.cRPG.listeners.PlayerDropItemEventListener;
-import com.symcs.cRPG.listeners.PlayerInteractEventListener;
-import com.symcs.cRPG.listeners.PlayerItemHeldEventListener;
-import com.symcs.cRPG.listeners.PlayerJoinEventListener;
-import com.symcs.cRPG.listeners.PlayerMoveEventListener;
-import com.symcs.cRPG.listeners.PlayerPickupItemEventListener;
-import com.symcs.cRPG.listeners.PlayerQuitEventListener;
-import com.symcs.cRPG.listeners.PlayerRespawnEventListener;
+import com.symcs.cRPG.listeners.*;
 
 
 public final class cRPG extends JavaPlugin {
@@ -81,7 +69,11 @@ public final class cRPG extends JavaPlugin {
 	    	listenerManager.addListener("EntityDamageByEntity", new EntityDamageByEntityEventListener(this));
 	    	listenerManager.addListener("EntityDamage", new EntityDamageEventListener(this));
 	    	listenerManager.addListener("EntityExplode", new EntityExplodeEventListener(this));
-	    	listenerManager.addListener("EntityDeath", new EntityDeathEventListener(this));	
+	    	listenerManager.addListener("EntityDeath", new EntityDeathEventListener(this));
+	    	
+	    	listenerManager.addListener("ProjectileHit", new ProjectileHitEventListener(this));
+	    	
+	    	listenerManager.addListener("CustomDamage", new CustomDamageEventListener(this));
 	    }
 	 
 	 private void setUpManagers(){

@@ -45,6 +45,10 @@ public class ProjectileManager {
 			return Projectiles.get((Projectile) projectile);
 		}else{return null;}
 	}
+	
+	public HashMap<Projectile, Skill> getProjectiles(){
+		return this.Projectiles;
+	}
 		
 	
 	

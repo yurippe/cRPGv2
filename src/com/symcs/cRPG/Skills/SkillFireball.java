@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Fireball;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.entity.Player;
 
@@ -20,6 +21,7 @@ public class SkillFireball extends Skill{
 		setSkillName("Fireball");
 		setSkillDescription(Arrays.asList("Cast a mighty fireball"));
 		setSkillCooldown(5);
+		setSkillIgnoreAllies();
 	}
 	
 	@Override
@@ -41,8 +43,13 @@ public class SkillFireball extends Skill{
 	@Override
 	public void onSkillHitPlayer(Player p){
 		p.sendMessage(this.player.getName() + " hit you with a fireball, that bitch");
-		
+		dealDamage(p, 10.0);
 		plugin.getPlayerManager().getPlayer(p).getStatusEffectManager().addStatusEffect(new StatusEffectStun(5, p));
+	}
+	
+	@Override
+	public void onSkillHitEntity(LivingEntity e){
+		dealDamage(e, 100.0);
 	}
 	
 	

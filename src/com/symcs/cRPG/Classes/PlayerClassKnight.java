@@ -17,6 +17,7 @@ public class PlayerClassKnight extends PlayerClass{
 	public PlayerClassKnight(Player player, cRPG plugin) {
 		super(player, plugin);
 		setClassName("Knight");
+		setDefenseMultiplier(0.5);
 		setDamageMultiplier(0.5);
 		setMaxHealth(20);
 		

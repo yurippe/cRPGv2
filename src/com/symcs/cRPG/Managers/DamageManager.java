@@ -1,6 +1,7 @@
 package com.symcs.cRPG.Managers;
 
 import com.symcs.cRPG.BaseClasses.Skill;
+import com.symcs.cRPG.CustomEvents.CustomDamageEvent;
 import com.symcs.cRPG.Data.PlayerData;
 import com.symcs.cRPG.utils.Party;
 
@@ -21,7 +22,98 @@ public class DamageManager {
 		this.plugin = plugin;
 	}
 	
+	private void onPlayerDamageEvent(EntityDamageEvent event){onPlayerDamageEvent(event, null);}
+	private void onPlayerDamageEvent(EntityDamageEvent event, LivingEntity damager){ //Damager can be null
+		//TODO split onEntityDamageEvent into these 2 for better readability
+		Player p = (Player)event.getEntity();
+		PlayerData pdat = plugin.getPlayerManager().getPlayer(p);
+		
+		
+		//IF cause if falldamage, check with status effects
+		if(event.getCause() == DamageCause.FALL){
+			if(pdat.getStatusEffectManager().takeFallDamage() == false){event.setCancelled(true);}
+			else{createCustomDamageEvent(p, event.getDamage());}
+			return; //No need for further checking
+		}
+		
+		createCustomDamageEvent(p, damager, event.getDamage());
+	}
+	
+	private void onLivingEntityDamageEvent(EntityDamageEvent event){onLivingEntityDamageEvent(event, null);}
+	private void onLivingEntityDamageEvent(EntityDamageEvent event, LivingEntity damager){ //Damager can be null
+		//TODO split onEntityDamageEvent into these 2 for better readability
+		LivingEntity e = (LivingEntity)event.getEntity();
+		
+		
+		createCustomDamageEvent(e, damager, event.getDamage());
+		
+	}
+	 //native damage
 	public void onEntityDamageEvent(EntityDamageEvent event){
+		if(event.getEntity() instanceof Player){
+			
+			if(event instanceof EntityDamageByEntityEvent){
+				EntityDamageByEntityEvent evente = (EntityDamageByEntityEvent) event;
+				if(plugin.getProjectileManager().isSkillProjectile(evente.getDamager())){
+					//the damager was a skill projectile
+					Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(evente.getDamager());
+					onSkillHitPlayer(damagerSkill, (Player) event.getEntity());
+					event.setDamage(0.0);
+					return; //Stop here to let the skill handle onhit
+				}
+				
+				else if(evente.getDamager() instanceof LivingEntity){
+					
+					onPlayerDamageEvent(event, (LivingEntity) evente.getDamager());
+					event.setDamage(0.0);
+					return;
+					
+				}
+				
+			}
+				 
+			onPlayerDamageEvent(event);
+			event.setDamage(0.0);
+			return;
+			
+		}
+		
+		else if(event.getEntity() instanceof LivingEntity){
+			
+    		if(event instanceof EntityDamageByEntityEvent){
+    			EntityDamageByEntityEvent evente = (EntityDamageByEntityEvent) event;
+    			if(plugin.getProjectileManager().isSkillProjectile(evente.getDamager())){
+					//the damager was a skill projectile
+					Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(evente.getDamager());
+					onSkillHitEntity(damagerSkill, (LivingEntity) event.getEntity());
+					event.setDamage(0.0);
+					return; //Stop here to let the skill handle onhit
+				}
+    			
+				else if(evente.getDamager() instanceof LivingEntity){
+					
+					onLivingEntityDamageEvent(event, (LivingEntity) evente.getDamager());
+					event.setDamage(0.0);
+					return;
+					
+				}
+    			
+    		}
+			
+			
+			onLivingEntityDamageEvent(event);
+			event.setDamage(0.0);
+			return;
+			
+		}
+		
+		else{return;} //if it is not a mob or player it is probably an item, let this pass
+		
+		//event.setDamage(0.0); //we manually apply the damage
+	}
+	
+	@Deprecated
+	public void OLD_onEntityDamageEvent(EntityDamageEvent event){
 		//Entity taking damage is a player
     	if(event.getEntity() instanceof Player){
     		Player p = (Player)event.getEntity();
@@ -36,6 +128,13 @@ public class DamageManager {
     					onSkillHitPlayer(damagerSkill, p);
     					event.setDamage(0.0);
     				}
+    			
+    			if(evente.getDamager() instanceof Player){
+    				Player p_damager = (Player) evente.getDamager();
+    				PlayerData damager_dat = plugin.getPlayerManager().getPlayer(p_damager);
+    				pdat.getPlayerClass().dealDamage(event.getFinalDamage() * damager_dat.getStatusEffectManager().damageModifier());
+    				//TODO stuff
+    			}
     		}
     		
     		//Cancel fall damage if you have a status effect that cancels it
@@ -81,30 +180,9 @@ public class DamageManager {
     	
 	}
 	
-	
+	@Deprecated
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent event){
-		//Entity taking damage is a player
-		if(event.getEntity() instanceof Player){
-			 Player p = (Player) event.getEntity();
 			 
-			 if(plugin.getProjectileManager().isSkillProjectile(event.getDamager())){
-					//the damager was a skill projectile
-					Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(event.getDamager());
-					onSkillHitPlayer(damagerSkill, p);
-				}
-			 
-		
-		}
-		
-		else if(event.getEntity() instanceof LivingEntity){
-			LivingEntity e = (LivingEntity) event.getEntity();
-			
-			 if(plugin.getProjectileManager().isSkillProjectile(event.getDamager())){
-					//the damager was a skill projectile
-					Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(event.getDamager());
-					onSkillHitEntity(damagerSkill, e);
-				}
-		}
 		
 	}
 	
@@ -144,14 +222,28 @@ public class DamageManager {
 		skill.onSkillHitEntityOrPlayer(entity);
 	}
 	
-	@SuppressWarnings("deprecation")
+	@Deprecated
 	public void invokeEntityDamageByEntityEvent(Entity damager, Entity damagee, DamageCause cause, double damage){
 		plugin.getServer().getPluginManager().callEvent(new EntityDamageByEntityEvent(damager, damagee, cause, damage));
 	}
 	
-	@SuppressWarnings("deprecation")
+	@Deprecated
 	public void invokeEntityDamageEvent(Entity damagee,DamageCause cause, double damage){
 		plugin.getServer().getPluginManager().callEvent(new EntityDamageEvent(damagee, cause, damage));
+	}
+	
+	public void createCustomDamageEvent(Player damagee, LivingEntity damager, double damage){createCustomDamageEvent((LivingEntity) damagee, damager, damage);}
+	public void createCustomDamageEvent(Player damagee, Player damager, double damage){createCustomDamageEvent((LivingEntity) damagee, (LivingEntity) damager, damage);}
+	public void createCustomDamageEvent(LivingEntity damagee,Player damager, double damage){createCustomDamageEvent(damagee,(LivingEntity) damager, damage);}
+	public void createCustomDamageEvent(LivingEntity damagee, LivingEntity damager, double damage){
+		CustomDamageEvent event = new CustomDamageEvent(damagee, damager, damage);
+		plugin.getServer().getPluginManager().callEvent(event);
+	}
+	
+	public void createCustomDamageEvent(Player damagee, double damage){createCustomDamageEvent((LivingEntity) damagee, damage);}
+	public void createCustomDamageEvent(LivingEntity damagee, double damage){
+		CustomDamageEvent event = new CustomDamageEvent(damagee, damage);
+		plugin.getServer().getPluginManager().callEvent(event);
 	}
 	
 	//TODO

@@ -9,7 +9,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -182,7 +181,7 @@ public class Skill {
 	
 	//can be overriden to add extra effects on hit
 	public void onSkillHitEntityOrPlayer(LivingEntity hit){
-		if(this.damage > 0){hit.damage(this.damage);}//TODO not sure if this triggers a dmg event
+		//if(this.damage > 0){hit.damage(this.damage);}//TODO not sure if this triggers a dmg event
 		onSkillHit(hit);
 	}
 	//alias for onSkillHitEntityOrPlayer
@@ -191,7 +190,8 @@ public class Skill {
 	}
 	
 	protected void dealDamage(LivingEntity entity, double dmg){
-		plugin.getDamageManager().invokeEntityDamageByEntityEvent(this.player, entity, DamageCause.CUSTOM, dmg);
+		plugin.getDamageManager().createCustomDamageEvent(entity, this.player, dmg);
+		//plugin.getDamageManager().invokeEntityDamageByEntityEvent(this.player, entity, DamageCause.CUSTOM, dmg);
 	}
 	
 	protected void dealDamage(LivingEntity entity){

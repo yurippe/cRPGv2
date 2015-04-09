@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import com.symcs.cRPG.cRPG;
+import com.symcs.cRPG.Data.PlayerData;
  
 public final class EntityDeathEventListener implements Listener {
 
@@ -24,7 +25,10 @@ public final class EntityDeathEventListener implements Listener {
     	
     	//make sure they dont drop skill items durr
         if(event.getEntity() instanceof Player){
-        	plugin.getPlayerManager().getPlayer((Player) event.getEntity()).getPlayerClass().onDeath(event);
+        	PlayerData pdat = plugin.getPlayerManager().getPlayer((Player) event.getEntity());
+        	pdat.getPlayerClass().onDeath(event);
+        	pdat.getStatusEffectManager().clearStatusEffects();
+        	
         }
 
     }

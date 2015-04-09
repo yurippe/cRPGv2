@@ -25,10 +25,10 @@ public class PlayerClassTEST extends PlayerClass{
 		setTierWeapon(2, new ItemStack(Material.BLAZE_ROD, 1), "FUCKING SORCERER WAND", Arrays.asList("Mage weapon", "Tier 2"));
 		
 		setSkill(1, new PlayerSkill(this, new SkillTEST(this.plugin)));
-		setSkill(2, new PlayerSkill(this, new SkillZAMPLE(this.plugin)));
+		setSkill(2, new PlayerSkill(this, new SkillSaviorsCall(this.plugin)));
 		setSkill(5, new PlayerSkill(this, new SkillCleave(this.plugin)));
-		setSkill(6, new PlayerSkill(this, new SkillSongOfDuality(this.plugin)));
-		setSkill(4, new PlayerSkill(this, new SkillShockWave(this.plugin)));
+		setSkill(6, new PlayerSkill(this, new SkillEternalFlame(this.plugin)));
+		setSkill(4, new PlayerSkill(this, new SkillFireball(this.plugin)));
 		setSkill(3, new PlayerSkill(this, new SkillCharge(this.plugin)));
 		
 	}

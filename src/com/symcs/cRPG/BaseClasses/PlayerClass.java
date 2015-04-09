@@ -32,6 +32,7 @@ public class PlayerClass {
 	protected boolean unlockable = false;
 	
 	protected double damageMulitplier = 1.0;
+	protected double defenseMultiplier = 1.0;
 	protected double healingMultiplier = 1.0;
 	protected double MaxHealth = 20;
 	
@@ -44,6 +45,7 @@ public class PlayerClass {
 	
 	
 	public ItemStack weapon_placeholder = new ItemStack(Material.ARMOR_STAND);
+	
 
 	public PlayerClass(Player player, cRPG plugin){
 		
@@ -158,6 +160,7 @@ public class PlayerClass {
 		this.player.updateInventory();
 	}
 	
+	
 	@Deprecated
 	public void onDamageTaken(EntityDamageEvent event){
 		
@@ -173,6 +176,7 @@ public class PlayerClass {
 		event.setDamage(modifiedDMG);
 	}
 	
+	@Deprecated
 	public void dealDamage(double rawDamage){
 		double modifiedDMG = rawDamage * this.damageMulitplier;
 		double newHP = this.player.getHealth() - modifiedDMG;
@@ -238,6 +242,13 @@ public class PlayerClass {
 	}
 	public void setHealingMultiplier(double HM){
 		this.healingMultiplier = HM;
+	}
+	public double getDefenseMultiplier(){
+		return this.defenseMultiplier;
+	}
+	
+	public void setDefenseMultiplier(double mult){
+		this.defenseMultiplier = mult;
 	}
 	
 	public void setTierWeapon(int tier, ItemStack item, String name, List<String> lore){
