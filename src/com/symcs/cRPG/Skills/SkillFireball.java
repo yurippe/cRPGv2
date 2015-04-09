@@ -30,15 +30,6 @@ public class SkillFireball extends Skill{
 	  
 	}
 	
-	/*
-	@Override
-	public void onProjectileHitPlayer(EntityDamageByEntityEvent event){
-		super(event);
-		Player p = (Player) event.getEntity();
-		p.sendMessage(this.Class.player.getName() + " hit you with a fireball, that bitch");
-		
-		plugin.getPlayerData(p).statusEffectManager.addStatusEffect(new StatusEffectStun(5, p));
-	}*/
 	
 	@Override
 	public void onSkillHitPlayer(Player p){

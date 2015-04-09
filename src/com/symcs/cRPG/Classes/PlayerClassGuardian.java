@@ -20,6 +20,7 @@ public class PlayerClassGuardian extends PlayerClass{
 		super(player, plugin);
 		setClassName("Guardian");
 		setDamageMultiplier(0.3);
+		setDefenseMultiplier(0.3);
 		setMaxHealth(30);
 		
 		setTierWeapon(1, new ItemStack(Material.ANVIL, 1), "Noob Hammer", Arrays.asList("Guardian weapon", "Tier 1"));

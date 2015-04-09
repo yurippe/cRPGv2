@@ -54,6 +54,7 @@ public class DamageManager {
 			
 			if(event instanceof EntityDamageByEntityEvent){
 				EntityDamageByEntityEvent evente = (EntityDamageByEntityEvent) event;
+				
 				if(plugin.getProjectileManager().isSkillProjectile(evente.getDamager())){
 					//the damager was a skill projectile
 					Skill damagerSkill = plugin.getProjectileManager().getSkillOfProjectile(evente.getDamager());
@@ -196,7 +197,7 @@ public class DamageManager {
 					return;
 				}
 				
-			}
+			}else if(skill.getPlayer() == player){return;}
 		}
 		
 		if(skill.getSkillDifferentOnAllies()){

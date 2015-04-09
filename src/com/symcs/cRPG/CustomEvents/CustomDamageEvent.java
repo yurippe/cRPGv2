@@ -5,6 +5,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+
 public class CustomDamageEvent extends Event implements Cancellable {
 	private static final HandlerList handlers = new HandlerList();
     private boolean cancelled;
@@ -12,6 +13,7 @@ public class CustomDamageEvent extends Event implements Cancellable {
     private LivingEntity damager;
     private LivingEntity damagee;
     private double damage;
+
     
     public CustomDamageEvent(LivingEntity damagee, LivingEntity damager, double damage) {
     	this.damager = damager;

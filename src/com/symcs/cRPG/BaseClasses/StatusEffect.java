@@ -50,6 +50,7 @@ public class StatusEffect{
 		public boolean takeFallDamage(){return true;}
 		public boolean canDie(){return true;}
 		public double damageModifier(){return 1.0;}
+		public double defenseModifier(){return 1.0;}
 		
 		public void onCast(){}
 		public void onCast(PlayerData playerdata, cRPG plugin){this.playerdata=playerdata;this.player=playerdata.player;this.plugin=plugin;onCast();}

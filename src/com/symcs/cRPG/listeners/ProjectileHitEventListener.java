@@ -20,9 +20,16 @@ public final class ProjectileHitEventListener implements Listener {
     @EventHandler
     public void onEvent(ProjectileHitEvent event)
     {
-        if(plugin.getProjectileManager().isSkillProjectile(event.getEntity())){
+        /*if(plugin.getProjectileManager().isSkillProjectile(event.getEntity())){
         	plugin.getProjectileManager().unregisterProjectile(event.getEntity());
-        }
+        }*/
+    	
+    	
+    	if(plugin.getProjectileManager().isSkillProjectile(event.getEntity())){
+    		plugin.getLogger().info(event.getEntity().getLocation().toString() + " - Skill arrow: ");
+    		plugin.getLogger().info(plugin.getProjectileManager().getSkillOfProjectile(event.getEntity()).toString());
+    	}
+    	
 
     }
 

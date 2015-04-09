@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.BaseClasses.Skill;
+import com.symcs.cRPG.StatusEffects.Generic.StatusEffectBonusDamage;
 import com.symcs.cRPG.utils.Hitboxes.HitboxCollection;
 
 public class SkillBlessedStrings extends Skill{
@@ -34,7 +35,7 @@ public class SkillBlessedStrings extends Skill{
 	public void onSkillHitPlayer(Player p){
 		
 		p.addPotionEffect(PotionEffectType.REGENERATION.createEffect(1200, 2));
-		//TODO status effect with increased dmg
+		plugin.getPlayerManager().getPlayer(p).getStatusEffectManager().addStatusEffect(new StatusEffectBonusDamage(1.1, 6));
 		p.sendMessage("Got buffed with Blessed Strings - Regeneration and Strength increased for 6 seconds");
 		
 	}

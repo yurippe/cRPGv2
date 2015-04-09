@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.CustomEvents.CustomDamageEvent;
 import com.symcs.cRPG.Data.PlayerData;
+import com.symcs.cRPG.utils.DamageCalculator;
 
 public final class CustomDamageEventListener implements Listener {
 
@@ -28,21 +29,16 @@ public final class CustomDamageEventListener implements Listener {
 	 
 	
 	 if(event.getDamager() == null){
-		 
-		 plugin.getLogger().info(event.getDamagee().getName() + " received " + Double.toString(event.getDamage()) + " damage");
-		 
-		 //event.getDamagee().damage(event.getDamage());
-		 
+		 plugin.getLogger().info(event.getDamagee().getName() + " received " + Double.toString(event.getDamage()) + " damage"); 
 	 }
-	 
-	 else{
-		 
+	 else{		 
 		 plugin.getLogger().info(event.getDamagee().getName() + " received " + Double.toString(event.getDamage()) + " damage from " + event.getDamager().getName());
-		 //event.getDamagee().damage(event.getDamage(), event.getDamager());
-		 
 	 }
 	 
-	 dealDamage(event.getDamagee(), event.getDamage());
+	 DamageCalculator dcal = new DamageCalculator(plugin, event.getDamagee(), event.getDamager(), event.getDamage());
+	 double finale = dcal.getFinalDamage();
+	 dealDamage(event.getDamagee(), finale);
+	 
 
  }
  

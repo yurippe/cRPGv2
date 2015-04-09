@@ -19,8 +19,8 @@ public class SkillCleave extends Skill{
 		super(plugin);
 		
 		setSkillItem(new ItemStack(Material.FIREBALL));
-		setSkillName("Fireball");
-		setSkillDescription(Arrays.asList("Cast a mighty fireball"));
+		setSkillName("Cleave");
+		setSkillDescription(Arrays.asList("Deal damage to enemies close to you"));
 		setSkillCooldown(5);
 		setSkillDamage(5.0);
 	}

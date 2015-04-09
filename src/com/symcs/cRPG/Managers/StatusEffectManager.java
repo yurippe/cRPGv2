@@ -99,6 +99,7 @@ public class StatusEffectManager {
 	public void clearStatusEffects(){
 		Iterator<StatusEffect> iter = this.StatusEffects.iterator();
 		while(iter.hasNext()){
+			Cooldowns.remove(iter.next()).cancel();
 			iter.remove();
 		}
 	}
@@ -180,15 +181,29 @@ public class StatusEffectManager {
 	
 	public double damageModifier(){
 			Iterator<StatusEffect> iter = this.StatusEffects.iterator();
+			double mod_total = 1.0;
 			while(iter.hasNext()){
 				StatusEffect effect = iter.next();
-				if(effect.getType() == StatusEffect.Type.TIMED){return effect.damageModifier();}
+				if(effect.getType() == StatusEffect.Type.TIMED){mod_total *= effect.damageModifier();}
 				if(effect.getType() == StatusEffect.Type.CHARGE || effect.getType() == StatusEffect.Type.CHARGE_LIMITED){
 					if(!(effect.damageModifier() == 1.0)){
 						if(effect.tickDuration()){effect.onFade(StatusEffect.FadeCause.CHARGES_SPENT);
 						try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}}
-						return effect.damageModifier();
-					}}} return 1.0;}
+						mod_total *= effect.damageModifier();
+					}}} return mod_total;}
+	
+	public double defenseModifier(){
+		Iterator<StatusEffect> iter = this.StatusEffects.iterator();
+		double mod_total = 1.0;
+		while(iter.hasNext()){
+			StatusEffect effect = iter.next();
+			if(effect.getType() == StatusEffect.Type.TIMED){mod_total *= effect.defenseModifier();}
+			if(effect.getType() == StatusEffect.Type.CHARGE || effect.getType() == StatusEffect.Type.CHARGE_LIMITED){
+				if(!(effect.defenseModifier() == 1.0)){
+					if(effect.tickDuration()){effect.onFade(StatusEffect.FadeCause.CHARGES_SPENT);
+					try{iter.remove();}catch(ConcurrentModificationException e){QueueForRemoval(effect);}}
+					mod_total *= effect.defenseModifier();
+				}}} return mod_total;}
 		
 	
 	

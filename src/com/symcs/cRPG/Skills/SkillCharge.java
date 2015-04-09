@@ -9,8 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import com.symcs.cRPG.StatusEffects.StatusEffectFallDamageImmunity;
 import com.symcs.cRPG.StatusEffects.StatusEffectStun;
+import com.symcs.cRPG.StatusEffects.Generic.StatusEffectFallDamageImmunity;
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.BaseClasses.Skill;
 import com.symcs.cRPG.Tasks.Task;

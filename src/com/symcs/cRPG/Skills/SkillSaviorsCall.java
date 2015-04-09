@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.BaseClasses.Skill;
-import com.symcs.cRPG.StatusEffects.StatusEffectSaviorsCall;
+import com.symcs.cRPG.StatusEffects.Generic.StatusEffectBonusSpeed;
 
 public class SkillSaviorsCall extends Skill{
 
@@ -22,6 +22,6 @@ public class SkillSaviorsCall extends Skill{
 	}
 	
 	public void Cast(){
-		plugin.getPlayerManager().getPlayer(this.player).getStatusEffectManager().addStatusEffect(new StatusEffectSaviorsCall(10));
+		plugin.getPlayerManager().getPlayer(this.player).getStatusEffectManager().addStatusEffect(new StatusEffectBonusSpeed(2, 10));
 	}
 }

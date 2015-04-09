@@ -1,12 +1,12 @@
-package com.symcs.cRPG.StatusEffects;
+package com.symcs.cRPG.StatusEffects.Generic;
 
 import org.bukkit.potion.PotionEffectType;
 
 import com.symcs.cRPG.BaseClasses.StatusEffect;
 
-public class StatusEffectSaviorsCall extends StatusEffect{
+public class StatusEffectBonusSpeed extends StatusEffect{
 
-	public StatusEffectSaviorsCall(int timelimit) {
+	public StatusEffectBonusSpeed(int strenght, int timelimit) {
 		super(timelimit, Type.CANCEL_ON_DAMAGE);
 	}
 	

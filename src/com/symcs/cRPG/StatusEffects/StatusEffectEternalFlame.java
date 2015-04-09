@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.bukkit.entity.Player;
 
+import com.symcs.cRPG.StatusEffects.Generic.StatusEffectDeathImmunity;
 import com.symcs.cRPG.Tasks.UnregisteredTask;
 import com.symcs.cRPG.utils.NMSFunctions;
 

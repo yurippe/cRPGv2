@@ -1,4 +1,4 @@
-package com.symcs.cRPG.StatusEffects;
+package com.symcs.cRPG.StatusEffects.Generic;
 
 import com.symcs.cRPG.BaseClasses.StatusEffect;
 
