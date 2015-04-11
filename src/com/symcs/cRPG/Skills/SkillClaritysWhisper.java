@@ -2,6 +2,7 @@ package com.symcs.cRPG.Skills;
 
 import java.util.Arrays;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -53,5 +54,10 @@ public class SkillClaritysWhisper extends Skill{
 	@Override
 	public void onSkillHitEntity(LivingEntity e){
 		dealDamage(e, 300);
+	}
+	
+	@Override
+	public void onProjectileLand(Location loc){
+		plugin.getLogger().info("Arrow landed at: " + loc.toString());
 	}
 }

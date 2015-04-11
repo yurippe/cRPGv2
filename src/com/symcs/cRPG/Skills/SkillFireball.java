@@ -2,6 +2,7 @@ package com.symcs.cRPG.Skills;
 
 import java.util.Arrays;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
@@ -43,6 +44,10 @@ public class SkillFireball extends Skill{
 		dealDamage(e, 100.0);
 	}
 	
+	@Override
+	public void onProjectileLand(Location loc){
+		plugin.getLogger().info("Fireball landed at: " + loc.toString());
+	}
 	
 
 }

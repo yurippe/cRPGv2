@@ -12,10 +12,10 @@ public class Task extends BukkitRunnable{
 	
 
 	
-	
-	public Task(cRPG plugin){
+	public Task(cRPG plugin){this(plugin, true);}
+	public Task(cRPG plugin, boolean register){
 		this.plugin = plugin;
-		plugin.getTaskManager().registerTask(this);
+		if(register){plugin.getTaskManager().registerTask(this);}
 
 	}
 	

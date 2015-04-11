@@ -26,7 +26,7 @@ public class PlayerClassTEST extends PlayerClass{
 		
 		setSkill(1, new PlayerSkill(this, new SkillTEST(this.plugin)));
 		setSkill(2, new PlayerSkill(this, new SkillClaritysWhisper(this.plugin)));
-		setSkill(5, new PlayerSkill(this, new SkillCleave(this.plugin)));
+		setSkill(5, new PlayerSkill(this, new SkillInferno(this.plugin)));
 		setSkill(6, new PlayerSkill(this, new SkillEternalFlame(this.plugin)));
 		setSkill(4, new PlayerSkill(this, new SkillFireball(this.plugin)));
 		setSkill(3, new PlayerSkill(this, new SkillCharge(this.plugin)));

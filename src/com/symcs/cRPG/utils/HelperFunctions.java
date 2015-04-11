@@ -219,4 +219,43 @@ public class HelperFunctions {
 	    return target;
      
     }
+    
+    public static List<Location> getCircle(Location loc, int radius, int height,
+            boolean hollow, boolean sphere, int plusY) {
+        List<Location> circleblocks = new ArrayList<Location>();
+        int cx = loc.getBlockX();
+        int cy = loc.getBlockY();
+        int cz = loc.getBlockZ();
+ 
+        for (int x = cx - radius; x <= cx + radius; x++) {
+            for (int z = cz - radius; z <= cz + radius; z++) {
+                for (int y = (sphere ? cy - radius : cy); y < (sphere ? cy
+                        + radius : cy + height); y++) {
+                    double dist = (cx - x) * (cx - x) + (cz - z) * (cz - z)
+                            + (sphere ? (cy - y) * (cy - y) : 0);
+ 
+                    if (dist < radius * radius
+                            && !(hollow && dist < (radius - 1) * (radius - 1))) {
+                        Location l = new Location(loc.getWorld(), x, y + plusY,
+                                z);
+                        circleblocks.add(l);
+                    }
+                }
+            }
+        }
+ 
+        return circleblocks;
+    }
+    
+    public static List<Block> getCircleBlocks(Location center, int radius,
+            boolean hollow, boolean sphere) {
+        List<Location> locs = getCircle(center, radius, radius, hollow, sphere, 0);
+        List<Block> blocks = new ArrayList<Block>();
+ 
+        for (Location loc : locs) {
+            blocks.add(loc.getBlock());
+        }
+ 
+        return blocks;
+    }
 }

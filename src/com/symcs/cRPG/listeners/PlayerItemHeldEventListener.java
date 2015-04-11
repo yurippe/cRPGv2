@@ -23,6 +23,7 @@ public final class PlayerItemHeldEventListener implements Listener {
  @EventHandler
  public void onEvent(PlayerItemHeldEvent event)
  {
+	 
     int newSlot = event.getNewSlot();
     PlayerData playerdata = plugin.getPlayerManager().getPlayer(event.getPlayer());
     if(playerdata.getPlayerClass().isArmed){
@@ -33,7 +34,7 @@ public final class PlayerItemHeldEventListener implements Listener {
     	event.setCancelled(true);
     	
     }
-    
+
 
  }
 

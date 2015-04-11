@@ -17,6 +17,7 @@ public class TaskHitboxRegister extends Task{
 	private Hitbox hitbox;
 	
 	private List<Block> blocks;
+	private boolean registerself=false;
 	
 	public TaskHitboxRegister(cRPG plugin, int Ticks, Hitbox hitbox, Skill skill, List<Block> blocks){
 		super(plugin);
@@ -37,6 +38,12 @@ public class TaskHitboxRegister extends Task{
 		this.blocks = null;
 	}
 	
+	public void setRegisterSelf(){setRegisterSelf(true);}
+	public void setRegisterSelf(boolean b){
+		this.registerself = b;
+	}
+	
+	
 	@Override
 	public void cancelEarly(){
 		this.TickCount = this.MaxTickCount;
@@ -49,9 +56,9 @@ public class TaskHitboxRegister extends Task{
 		{
 			if(TickCount <= MaxTickCount)
 			{
-
+					
   					hitbox.registerHits(this.skill);
-  					
+  					if(this.registerself){hitbox.registerSelf(this.skill);}
   					
   					TickCount ++;
   			}

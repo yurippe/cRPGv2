@@ -16,7 +16,6 @@ public class PlayerSkill {
 	private int remainingCooldown = 0;
 	
 	protected cRPG plugin;
-	protected PlayerData playerdata;
 	protected PlayerClass playerclass;
 	
 	public PlayerSkill(PlayerClass playerClass, Skill skill){
@@ -24,7 +23,6 @@ public class PlayerSkill {
 		this.skill = skill;
 		this.plugin = this.skill.getPlugin();
 		this.skill.setPlayer(playerClass.getPlayer());
-		this.playerdata = this.plugin.getPlayerManager().getPlayer(playerClass.getPlayer());
 	}
 	
 	public boolean onCooldown(){
@@ -49,7 +47,8 @@ public class PlayerSkill {
 	
 	public int calculateCooldown(){
 		//TODO calculate cooldown with cooldown reductions
-		double aprox = getCooldown() * this.playerdata.getStatusEffectManager().cooldownModifier();
+		PlayerData pdat = this.plugin.getPlayerManager().getPlayer(this.playerclass.getPlayer());
+		double aprox = getCooldown() * pdat.getStatusEffectManager().cooldownModifier();
 		return (int) aprox;
 	}
 	

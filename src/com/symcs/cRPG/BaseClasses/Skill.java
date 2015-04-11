@@ -3,6 +3,7 @@ package com.symcs.cRPG.BaseClasses;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -186,6 +187,11 @@ public class Skill {
 	}
 	//alias for onSkillHitEntityOrPlayer
 	public void onSkillHit(LivingEntity hit){
+		
+	}
+	
+	//can override to get location of where a projectile lands
+	public void onProjectileLand(Location loc){
 		
 	}
 	

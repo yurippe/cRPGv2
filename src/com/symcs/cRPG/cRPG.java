@@ -21,6 +21,7 @@ public final class cRPG extends JavaPlugin {
 	private ListenerManager listenerManager;
 	private DamageManager damageManager;
 	private PremiumManager premiumManager;
+	private EffectManager effectManager;
 	
 	@Override
     public void onEnable() {
@@ -63,6 +64,7 @@ public final class cRPG extends JavaPlugin {
 	    	
 	    	listenerManager.addListener("PlayerRespawn", new PlayerRespawnEventListener(this));
 	    	listenerManager.addListener("PlayerMove", new PlayerMoveEventListener(this));
+	    	listenerManager.addListener("PlayerItemDamage", new PlayerItemDamageEventListener(this));
 	    	
 	    	listenerManager.addListener("InventoryClick", new InventoryClickEventListener(this));
 	    	
@@ -86,6 +88,7 @@ public final class cRPG extends JavaPlugin {
 		 this.damageManager = new DamageManager(this);
 		 this.listenerManager = new ListenerManager(this);
 		 this.premiumManager = new PremiumManager(this);
+		 this.effectManager = new EffectManager(this);
 	 }
 	 
 	 public PartyManager getPartyManager(){return this.partyManager;}
@@ -97,5 +100,6 @@ public final class cRPG extends JavaPlugin {
 	 public ListenerManager getListenerManager(){return this.listenerManager;}
 	 public DamageManager getDamageManager(){return this.damageManager;}
 	 public PremiumManager getPremiumManager(){return this.premiumManager;}
+	 public EffectManager getEffectManager(){return this.effectManager;}
 
 }
