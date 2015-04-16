@@ -75,6 +75,21 @@ public class Skill%s extends Skill{
 	//You can use this method to see when and where it lands.
 	}
 
+	@Override
+	public void EventReservationCallback(Event e){
+        //Put something like:
+	//
+	//plugin.getListenerManager().reserveNextEvent("PlayerMove", new EventReservation(this){
+	//@Override
+	//public boolean If(Event e){
+	//PlayerMoveEvent event = (PlayerMoveEvent)e;
+	//if(event.getPlayer() == skill.getPlayer()){return true;}else{return false;}
+	//}});
+	//
+        //In Cast(), and this method will be called on the next event (in this case next PlayerMoveEvent)
+        //PS: PlayerMoveEvent does NOT work, because we are saving those massive ammounts of calls
+	}
+
 }
 """%(name, name, name,name)
     return x
