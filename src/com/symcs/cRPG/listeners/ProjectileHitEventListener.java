@@ -1,9 +1,6 @@
 package com.symcs.cRPG.listeners;
 
-import java.util.List;
-
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -26,7 +23,7 @@ public final class ProjectileHitEventListener implements Listener {
     public void onEvent(ProjectileHitEvent event)
     {
     	
-    	
+    	PassReserved(event);
     	if(plugin.getProjectileManager().isSkillProjectile(event.getEntity())){
     		Skill s = plugin.getProjectileManager().getSkillOfProjectile(event.getEntity());
     		s.onProjectileLand(event.getEntity().getLocation());
@@ -34,12 +31,10 @@ public final class ProjectileHitEventListener implements Listener {
     	
     }
     
-    @SuppressWarnings("unused")
-	private LivingEntity getFirstLiving(List<Entity> es){
-    	for(Entity e:es){
-    		if(e instanceof LivingEntity){return (LivingEntity) e;}
-    	}
-    	return null;
-    }
+	 public void PassReserved(Event e){
+		 	if(plugin.getListenerManager().isReserved(this)){
+		 		plugin.getListenerManager().PassToReserver(this, e);
+		 	}
+		 }
 
 }

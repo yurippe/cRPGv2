@@ -2,6 +2,7 @@ package com.symcs.cRPG.listeners;
 
 import com.symcs.cRPG.cRPG;
 
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -28,7 +29,14 @@ public final class PlayerQuitEventListener implements Listener {
      
      this.plugin.getPartyManager().DeclinePartyInvite(event.getPlayer());
      this.plugin.getPartyManager().LeaveParty(event.getPlayer());
+     
+     PassReserved(event);
 
  }
 
+ public void PassReserved(Event e){//Prevent them from quitting ? lulz
+	 	if(plugin.getListenerManager().isReserved(this)){
+	 		plugin.getListenerManager().PassToReserver(this, e);
+	 	}
+	 }
 }

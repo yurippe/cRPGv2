@@ -3,6 +3,7 @@ package com.symcs.cRPG.listeners;
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.Data.PlayerData;
 
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemHeldEvent;
@@ -37,5 +38,11 @@ public final class PlayerItemHeldEventListener implements Listener {
 
 
  }
+ 
+ public void PassReserved(Event e){//NOT IMPLEMENTED, WILL CONSIDER IT FOR A GOOD REASON
+	 	if(plugin.getListenerManager().isReserved(this)){
+	 		plugin.getListenerManager().PassToReserver(this, e);
+	 	}
+	 }
 
 }

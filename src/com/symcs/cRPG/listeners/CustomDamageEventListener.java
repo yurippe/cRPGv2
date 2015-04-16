@@ -2,6 +2,7 @@ package com.symcs.cRPG.listeners;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 
@@ -25,18 +26,20 @@ public final class CustomDamageEventListener implements Listener {
  @EventHandler
  public void onEvent(CustomDamageEvent event)
  {
-  
+	 PassReserved(event);
+	 if(event.isCancelled()){return;}
+	 
 	 DamageCalculator dcal = new DamageCalculator(plugin, event.getDamagee(), event.getDamager(), event.getDamage());
 	 double finale = dcal.getFinalDamage();
 	 dealDamage(event.getDamagee(), finale);
 	
 	 if(event.getDamager() == null){
 		 String hp = " (" + Double.toString(event.getDamagee().getHealth()) + "/" + Double.toString(event.getDamagee().getMaxHealth()) + ")";
-		 plugin.getLogger().info(event.getDamagee().getName() + hp + " received " + Double.toString(event.getDamage()) + " damage"); 
+		 plugin.getLogger().info(event.getDamagee().getName() + hp + " received " + Double.toString(finale) + " damage"); 
 	 }
 	 else{
 		 String hp = " (" + Double.toString(event.getDamagee().getHealth()) + "/" + Double.toString(event.getDamagee().getMaxHealth()) + ")";
-		 plugin.getLogger().info(event.getDamagee().getName() + hp + " received " + Double.toString(event.getDamage()) + " damage from " + event.getDamager().getName());
+		 plugin.getLogger().info(event.getDamagee().getName() + hp + " received " + Double.toString(finale) + " damage from " + event.getDamager().getName());
 	 }
 	 
 	 
@@ -60,6 +63,12 @@ public final class CustomDamageEventListener implements Listener {
 	}
 	
 	entity.setHealth(newHealth);
+ }
+ 
+ public void PassReserved(Event e){
+ 	if(plugin.getListenerManager().isReserved(this)){
+ 		plugin.getListenerManager().PassToReserver(this, e);
+ 	}
  }
 
 }

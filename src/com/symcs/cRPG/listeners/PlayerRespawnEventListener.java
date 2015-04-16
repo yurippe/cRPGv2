@@ -1,5 +1,6 @@
 package com.symcs.cRPG.listeners;
 
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -20,7 +21,14 @@ public final class PlayerRespawnEventListener implements Listener {
     public void onEvent(PlayerRespawnEvent event)
     {
         plugin.getPlayerManager().getPlayer(event.getPlayer()).getPlayerClass().onRespawn();
-
+        
+        PassReserved(event);
     }
+    
+	 public void PassReserved(Event e){
+		 	if(plugin.getListenerManager().isReserved(this)){
+		 		plugin.getListenerManager().PassToReserver(this, e);
+		 	}
+		 }
 
 }

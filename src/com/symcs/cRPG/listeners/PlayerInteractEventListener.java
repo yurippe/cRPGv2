@@ -3,6 +3,7 @@ package com.symcs.cRPG.listeners;
 import com.symcs.cRPG.cRPG;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -40,7 +41,15 @@ public final class PlayerInteractEventListener implements Listener {
 			 }
 		 }
 	 }
+	 
+	 if(!(event.isCancelled())){PassReserved(event);}
 
  }
+ 
+ public void PassReserved(Event e){
+	 	if(plugin.getListenerManager().isReserved(this)){
+	 		plugin.getListenerManager().PassToReserver(this, e);
+	 	}
+	 }
 
 }

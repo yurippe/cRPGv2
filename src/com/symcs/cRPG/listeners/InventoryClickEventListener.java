@@ -3,6 +3,7 @@ package com.symcs.cRPG.listeners;
 import com.symcs.cRPG.cRPG;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -45,5 +46,11 @@ public final class InventoryClickEventListener implements Listener {
 
 	 
  }
+ 
+ public void PassReserved(Event e){//NOT IMPLEMENTED HERE, WILL CONSIDER IT IF I EVER HAVE TO
+	 	if(plugin.getListenerManager().isReserved(this)){
+	 		plugin.getListenerManager().PassToReserver(this, e);
+	 	}
+	 }
 
 }

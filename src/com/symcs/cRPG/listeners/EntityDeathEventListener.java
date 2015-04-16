@@ -1,6 +1,7 @@
 package com.symcs.cRPG.listeners;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -22,7 +23,7 @@ public final class EntityDeathEventListener implements Listener {
     @EventHandler
     public void onEvent(EntityDeathEvent event)
     {
-    	
+    	PassReserved(event);
     	//make sure they dont drop skill items durr
         if(event.getEntity() instanceof Player){
         	PlayerData pdat = plugin.getPlayerManager().getPlayer((Player) event.getEntity());
@@ -32,5 +33,11 @@ public final class EntityDeathEventListener implements Listener {
         }
 
     }
+    
+	 public void PassReserved(Event e){
+		 	if(plugin.getListenerManager().isReserved(this)){
+		 		plugin.getListenerManager().PassToReserver(this, e);
+		 	}
+		 }
 
 }

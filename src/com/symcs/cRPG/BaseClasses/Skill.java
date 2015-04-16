@@ -9,6 +9,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -202,6 +203,9 @@ public class Skill {
 		plugin.getDamageManager().createCustomDamageEvent(entity, this.player, this.damage);
 		//dealDamage(entity, this.damage);
 	}
+	
+	//Called if you reserved an event
+	public void EventReservationCallback(Event e){}
 	
 	public void Cast(){
 		

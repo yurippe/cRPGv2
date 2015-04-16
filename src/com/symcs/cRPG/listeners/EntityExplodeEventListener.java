@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityExplodeEvent;
@@ -26,7 +27,7 @@ public final class EntityExplodeEventListener implements Listener {
  @EventHandler
  public void onEvent(EntityExplodeEvent event)
  {
-	 
+	 	PassReserved(event);
 		if(event.getEntity() instanceof Projectile){
 			Projectile proj = (Projectile)event.getEntity();
 			if(plugin.getProjectileManager().isSkillProjectile(proj)){
@@ -46,5 +47,11 @@ public final class EntityExplodeEventListener implements Listener {
 		}
 
  }
+ 
+ public void PassReserved(Event e){
+	 	if(plugin.getListenerManager().isReserved(this)){
+	 		plugin.getListenerManager().PassToReserver(this, e);
+	 	}
+	 }
 
 }

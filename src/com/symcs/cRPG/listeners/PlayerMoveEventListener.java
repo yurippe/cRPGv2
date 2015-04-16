@@ -21,8 +21,14 @@ public final class PlayerMoveEventListener implements Listener {
     @EventHandler
     public void onEvent(PlayerMoveEvent event)
     {
-        
+        //PassReserved(event); //Could (?) cause lag problems with the massive ammounts of calls from this event
 
+    }
+    
+    public void PassReserved(PlayerMoveEvent e){//Not implemented cause of lag problems
+    	if(plugin.getListenerManager().isReserved(this)){
+    		plugin.getListenerManager().PassToReserver(this, e);
+    	}
     }
 
 }
