@@ -42,6 +42,7 @@ public final class cRPG extends JavaPlugin {
 		 
 	    	this.taskManager.stopAllTasks();
 	    	this.blockManager.restoreAllBlocks();
+	    	this.effectManager.onDisable();
 	    	for(PlayerData dat: this.playerManager.getPlayers().values()){
 	    		dat.onDisable();
 	    	}

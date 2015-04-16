@@ -2,6 +2,7 @@ name: cRPG
 version: 0.1.0
 main: com.symcs.cRPG.cRPG
 author: Chriz
+softdepend: [EffectLib]
 
 
 

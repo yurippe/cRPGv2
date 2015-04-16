@@ -9,9 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.BaseClasses.PlayerClass;
 import com.symcs.cRPG.BaseClasses.PlayerSkill;
-import com.symcs.cRPG.Skills.SkillCharge;
-import com.symcs.cRPG.Skills.SkillEarthWall;
-import com.symcs.cRPG.Skills.SkillEternalFlame;
+import com.symcs.cRPG.Skills.Knight.SkillCharge;
+import com.symcs.cRPG.Skills.Knight.SkillEternalFlame;
+import com.symcs.cRPG.Skills.Mage.SkillEarthWall;
 
 public class PlayerClassGuardian extends PlayerClass{
 	

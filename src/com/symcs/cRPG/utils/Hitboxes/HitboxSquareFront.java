@@ -19,7 +19,7 @@ public class HitboxSquareFront extends Hitbox{
 	private double depth;
 	
 	public HitboxSquareFront(cRPG plugin, Player p, double left_right, double forward, double height){
-		this(plugin, p, left_right, forward, height, 0);
+		this(plugin, p, left_right, forward, height, 1);
 	}
 	
 	public HitboxSquareFront(cRPG plugin, Player p, double left_right, double forward, double height, double depth){
@@ -41,8 +41,8 @@ public class HitboxSquareFront extends Hitbox{
 		Vector RightLook = dirPerp.clone().multiply(0-sides);
 		
 		
-		Vector p1 = PlayerPoint.clone().add(LeftLook.add(direction.multiply(forward).add(new Vector(0, 0-depth, 0))));
-		Vector p2 = PlayerPoint.clone().add(RightLook.add(new Vector(0, height, 0)));
+		Vector pp1 = PlayerPoint.clone().add(LeftLook.add(direction.multiply(forward).add(new Vector(0, 0-depth, 0))));
+		Vector pp2 = PlayerPoint.clone().add(RightLook.add(new Vector(0, height, 0)));
 		
 		/*
 		double x1 = Math.min(p1.getX(), p2.getX());
@@ -52,8 +52,8 @@ public class HitboxSquareFront extends Hitbox{
 		double y2 = Math.max(p1.getY(), p2.getY());
 		double z2 = Math.max(p1.getZ(), p2.getZ());
 		*/
-		p1 = new Vector( Math.min(p1.getX(), p2.getX()), Math.min(p1.getY(), p2.getY()), Math.min(p1.getZ(), p2.getZ()));
-		p2 = new Vector( Math.max(p1.getX(), p2.getX()), Math.max(p1.getY(), p2.getY()), Math.max(p1.getZ(), p2.getZ()));
+		Vector p1 = new Vector( Math.min(pp1.getX(), pp2.getX()), Math.min(pp1.getY(), pp2.getY()), Math.min(pp1.getZ(), pp2.getZ()));
+		Vector p2 = new Vector( Math.max(pp1.getX(), pp2.getX()), Math.max(pp1.getY(), pp2.getY()), Math.max(pp1.getZ(), pp2.getZ()));
 		
 		//p1.toLocation(player.getWorld()).getBlock().setType(Material.EMERALD_BLOCK);
 		//p2.toLocation(player.getWorld()).getBlock().setType(Material.EMERALD_BLOCK);
@@ -65,8 +65,8 @@ public class HitboxSquareFront extends Hitbox{
 		List<LivingEntity> returnlist = new ArrayList<LivingEntity>();
 		for(Entity e: ents){
 			if(e instanceof LivingEntity){
-				//if(e.getLocation().toVector().isInAABB(p1, p2)){
-				if(contains(e.getLocation(), p1, p2)){
+				if(e.getLocation().toVector().isInAABB(p1, p2)){
+				//if(contains(e.getLocation(), p1, p2)){
 					returnlist.add((LivingEntity)e);
 				}
 			}

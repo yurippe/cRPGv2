@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.BaseClasses.PlayerClass;
 import com.symcs.cRPG.BaseClasses.PlayerSkill;
-import com.symcs.cRPG.Skills.SkillEarthWall;
+import com.symcs.cRPG.Skills.Knight.*;
 
 
 public class PlayerClassKnight extends PlayerClass{
@@ -23,7 +23,10 @@ public class PlayerClassKnight extends PlayerClass{
 		
 		setTierWeapon(1, new ItemStack(Material.WOOD_SWORD, 1), "Noob Sword",Arrays.asList("Knight weapon", "Tier 1"));
 		
-		setSkill(1, new PlayerSkill(this, new SkillEarthWall(this.plugin)));
+		setSkill(1, new PlayerSkill(this, new SkillCleave(this.plugin)));
+		setSkill(2, new PlayerSkill(this, new SkillPiety(this.plugin)));
+		setSkill(3, new PlayerSkill(this, new SkillCharge(this.plugin)));
+		setSkill(4, new PlayerSkill(this, new SkillEternalFlame(this.plugin)));
 	}
 
 	

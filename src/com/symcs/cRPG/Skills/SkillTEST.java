@@ -2,14 +2,12 @@ package com.symcs.cRPG.Skills;
 
 import java.util.Arrays;
 
-import org.bukkit.Chunk;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.BaseClasses.Skill;
-import com.symcs.cRPG.utils.RelativeBlocks;
+import com.symcs.cRPG.utils.AnimationEffects.EffectBeam;
 
 
 public class SkillTEST extends Skill{
@@ -30,23 +28,8 @@ public class SkillTEST extends Skill{
 	@Override
 	public void Cast(){
 		
-		Block b = RelativeBlocks.frontOfPlayer(this.player, 1);
-		b.setType(Material.GOLD_BLOCK);
-		log("BLOCK: " + " X:" + Integer.toString(b.getX()) + " Y:" + Integer.toString(b.getY()) + " Z:" + Integer.toString(b.getZ()));
-		Chunk c = b.getChunk();
-		log("CHUNK:" + " X:" + Integer.toString(c.getX()) + " Z:" + Integer.toString(c.getZ()));
-		
-		//int guessedCalcX = ((b.getX() - (b.getX() % 16))/16);
-		//int guessedCalcZ = ((b.getZ() - (b.getZ() % 16))/16);
-		int guessedCalcX; int guessedCalcZ;
-		guessedCalcX = Math.floorDiv(b.getX(), 16);
-		guessedCalcZ = Math.floorDiv(b.getZ(), 16);
-		
-		log("GUESS:" + " X:" + Integer.toString(guessedCalcX) + " Z:" + Integer.toString(guessedCalcZ));
-		
-		Block gb = c.getBlock(b.getX() % 16, b.getY(), b.getZ()%16);
-		
-		log("GUESS_BLOCK:" + " X:" + Integer.toString(gb.getX()) + " Y:" + Integer.toString(gb.getY()) + " Z:" + Integer.toString(gb.getZ()));
+		EffectBeam beam = new EffectBeam(plugin, 10, player);
+		beam.play(3);
 		/*Block b = RelativeBlocks.frontOfPlayer(this.player,3);
 		b.setType(Material.STONE);
 

@@ -27,7 +27,7 @@ public class Skill {
 	
 	protected cRPG plugin;
 	private int skillCooldown = 0;
-	protected double damage = 0.0;
+	protected double damage = 0.0D;
 	
 	protected Player player;
 	protected Entity entity;
@@ -182,7 +182,6 @@ public class Skill {
 	
 	//can be overriden to add extra effects on hit
 	public void onSkillHitEntityOrPlayer(LivingEntity hit){
-		//if(this.damage > 0){hit.damage(this.damage);}//TODO not sure if this triggers a dmg event
 		onSkillHit(hit);
 	}
 	//alias for onSkillHitEntityOrPlayer
@@ -197,11 +196,11 @@ public class Skill {
 	
 	protected void dealDamage(LivingEntity entity, double dmg){
 		plugin.getDamageManager().createCustomDamageEvent(entity, this.player, dmg);
-		//plugin.getDamageManager().invokeEntityDamageByEntityEvent(this.player, entity, DamageCause.CUSTOM, dmg);
 	}
 	
 	protected void dealDamage(LivingEntity entity){
-		dealDamage(entity, this.damage);
+		plugin.getDamageManager().createCustomDamageEvent(entity, this.player, this.damage);
+		//dealDamage(entity, this.damage);
 	}
 	
 	public void Cast(){

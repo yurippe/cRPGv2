@@ -26,18 +26,19 @@ public final class CustomDamageEventListener implements Listener {
  public void onEvent(CustomDamageEvent event)
  {
   
-	 
-	
-	 /*if(event.getDamager() == null){
-		 plugin.getLogger().info(event.getDamagee().getName() + " received " + Double.toString(event.getDamage()) + " damage"); 
-	 }
-	 else{		 
-		 plugin.getLogger().info(event.getDamagee().getName() + " received " + Double.toString(event.getDamage()) + " damage from " + event.getDamager().getName());
-	 }*/
-	 
 	 DamageCalculator dcal = new DamageCalculator(plugin, event.getDamagee(), event.getDamager(), event.getDamage());
 	 double finale = dcal.getFinalDamage();
 	 dealDamage(event.getDamagee(), finale);
+	
+	 if(event.getDamager() == null){
+		 String hp = " (" + Double.toString(event.getDamagee().getHealth()) + "/" + Double.toString(event.getDamagee().getMaxHealth()) + ")";
+		 plugin.getLogger().info(event.getDamagee().getName() + hp + " received " + Double.toString(event.getDamage()) + " damage"); 
+	 }
+	 else{
+		 String hp = " (" + Double.toString(event.getDamagee().getHealth()) + "/" + Double.toString(event.getDamagee().getMaxHealth()) + ")";
+		 plugin.getLogger().info(event.getDamagee().getName() + hp + " received " + Double.toString(event.getDamage()) + " damage from " + event.getDamager().getName());
+	 }
+	 
 	 
 
  }
@@ -58,7 +59,6 @@ public final class CustomDamageEventListener implements Listener {
 		 
 	}
 	
-	 
 	entity.setHealth(newHealth);
  }
 

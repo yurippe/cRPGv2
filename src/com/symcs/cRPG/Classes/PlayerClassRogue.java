@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.BaseClasses.PlayerClass;
 import com.symcs.cRPG.BaseClasses.PlayerSkill;
-import com.symcs.cRPG.Skills.SkillEarthWall;
+import com.symcs.cRPG.Skills.Mage.SkillEarthWall;
 
 public class PlayerClassRogue extends PlayerClass{
 	

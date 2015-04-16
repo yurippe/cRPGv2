@@ -10,6 +10,11 @@ import com.symcs.cRPG.cRPG;
 import com.symcs.cRPG.BaseClasses.PlayerClass;
 import com.symcs.cRPG.BaseClasses.PlayerSkill;
 import com.symcs.cRPG.Skills.*;
+import com.symcs.cRPG.Skills.Bard.SkillClaritysWhisper;
+import com.symcs.cRPG.Skills.Knight.SkillCharge;
+import com.symcs.cRPG.Skills.Knight.SkillEternalFlame;
+import com.symcs.cRPG.Skills.Mage.SkillFireball;
+import com.symcs.cRPG.Skills.Mage.SkillInferno;
 
 
 public class PlayerClassTEST extends PlayerClass{
